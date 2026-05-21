@@ -58,6 +58,13 @@ class NoteManager:
         except json.JSONDecodeError:
             print("Warning: notes file corrupted. Starting fresh.")
             self.notes = []
+    
+    def clear_by_employee(self, name):
+        self.notes = [
+        n for n in self.notes
+        if n.employee_name.lower() != name.lower()
+        ]
+        self.save_to_file()
 
 
 
