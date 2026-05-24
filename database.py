@@ -15,7 +15,7 @@ connect_args = {}
 if "supabase" in DATABASE_URL:
     connect_args = {"sslmode": "require"}
 
-engine = create_engine(DATABASE_URL, connect_args=connect_args)
+engine = create_engine(DATABASE_URL, connect_args=connect_args, pool_pre_ping=True)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
