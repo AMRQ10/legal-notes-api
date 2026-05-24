@@ -27,6 +27,14 @@ class NoteRequest(BaseModel):
 def root():
     return {"message": f"{APP_NAME} is running", "version": "2.0.0"}
 
+@app.get("/health")
+def health_check():
+    return {
+        "status": "healthy",
+        "api": APP_NAME,
+        "version": "2.0.0"
+    }
+
 @app.get("/notes")
 def get_all_notes(db: Session = Depends(get_db)):
     notes = db.query(NoteDB).all()
